@@ -16,6 +16,18 @@ class Platform(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
+class Target(pygame.sprite.Sprite):
+    """ target """
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.image = pygame.Surface([50, settings.SCREEN_HEIGHT])
+        self.image.fill(settings.WHITE)
+
+        self.rect = self.image.get_rect()
+
 class Level():
     """ This is a generic super-class used to define a level.
         Create a child class for each level with level-specific
@@ -26,6 +38,7 @@ class Level():
             platforms collide with the player. """
         self.platform_list = pygame.sprite.Group()
         self.enemy_list = pygame.sprite.Group()
+        self.target_list = pygame.sprite.Group()
         self.player = player
 
         # How far this world has been scrolled left/right
@@ -36,6 +49,7 @@ class Level():
         """ Update everything in this level."""
         self.platform_list.update()
         self.enemy_list.update()
+        self.target_list.update()
 
     def draw(self, screen):
         """ Draw everything on this level. """
@@ -46,6 +60,7 @@ class Level():
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
         self.enemy_list.draw(screen)
+        self.target_list.draw(screen)
 
     def shift_world(self, shift_x):
         """ When the user moves left/right and we need to scroll
@@ -61,6 +76,9 @@ class Level():
         for enemy in self.enemy_list:
             enemy.rect.x += shift_x
 
+        for target in self.target_list:
+            target.rect.x += shift_x
+
 
 # Create platforms for the level
 class Level_01(Level):
@@ -72,13 +90,14 @@ class Level_01(Level):
         # Call the parent constructor
         Level.__init__(self, player)
 
-        self.level_limit = -1000
+        self.level_limit = -2000
 
         # Array with width, height, x, and y of platform
         level = [[210, 70, 500, 500],
                  [210, 70, 800, 400],
                  [210, 70, 1000, 500],
                  [210, 70, 1120, 280],
+                 [1010, 100, 1620, 350],
                  ]
 
         # Go through the array above and add platforms
@@ -88,6 +107,12 @@ class Level_01(Level):
             block.rect.y = platform[3]
             block.player = self.player
             self.platform_list.add(block)
+
+        target = Target()
+        target.rect.x =abs(self.level_limit-900)
+        target.rect.y = 0;
+        self.target_list.add(target)
+
 
 
 # Create platforms for the level
