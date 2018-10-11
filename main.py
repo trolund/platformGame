@@ -13,8 +13,17 @@ def main():
 
     pygame.display.set_caption("Side-scrolling Platformer")
 
+    # Set positions of graphics
+    background_position = [0, 0]
+
+    # Load and set up graphics.
+    background_image = pygame.image.load("assets/bitmap/bg.jpg").convert()
+    # player_image = pygame.image.load("playerShip1_orange.png").convert()
+    # player_image.set_colorkey(settings.BLACK)
+
     # Create the player
     player = Player.Player()
+
 
     # Create all the levels
     level_list = []
@@ -38,7 +47,7 @@ def main():
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
 
-    # -------- Main Program Loop -----------
+    # -------- Main game Loop -----------
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -85,9 +94,14 @@ def main():
                 current_level = level_list[current_level_no]
                 player.level = current_level
 
+
+        # Copy image to screen:
+        screen.blit(background_image, background_position)
+
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
         active_sprite_list.draw(screen)
+
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
@@ -96,6 +110,9 @@ def main():
 
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
+
+        #print(player.rect.x)
+        print(current_level.getShift_world())
 
     # Be IDLE friendly. If you forget this line, the program will 'hang'
     # on exit.

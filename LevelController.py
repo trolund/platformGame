@@ -55,7 +55,7 @@ class Level():
         """ Draw everything on this level. """
 
         # Draw the background
-        screen.fill(settings.BLUE)
+        #screen.fill(settings.BLUE)
 
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
@@ -78,6 +78,9 @@ class Level():
 
         for target in self.target_list:
             target.rect.x += shift_x
+
+    def getShift_world(self):
+        return self.world_shift
 
 
 # Create platforms for the level
