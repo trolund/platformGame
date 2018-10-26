@@ -192,6 +192,9 @@ class Level_01(Level):
         block.level = self
         self.platform_list.add(block)
 
+        enemy = Enemy(200)
+        self.enemy_list.add(enemy)
+
 
         target = Target()
         target.rect.x =abs(self.level_limit-900)
