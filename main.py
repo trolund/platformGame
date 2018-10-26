@@ -17,7 +17,7 @@ def main():
     background_position = [0, 0]
 
     # Load and set up graphics.
-    background_image = pygame.image.load("assets/bitmap/bg.jpg").convert()
+    background_image = pygame.image.load("assets/bg.png").convert()
     # player_image = pygame.image.load("playerShip1_orange.png").convert()
     # player_image.set_colorkey(settings.BLACK)
 
@@ -112,7 +112,7 @@ def main():
         pygame.display.flip()
 
         #print(player.rect.x)
-        print(current_level.getShift_world())
+        #print(current_level.getShift_world())
 
     # Be IDLE friendly. If you forget this line, the program will 'hang'
     # on exit.

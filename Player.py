@@ -30,7 +30,10 @@ class Player(pygame.sprite.Sprite):
         # List of sprites we can bump against
         self.level = None
 
+        self.HP = 100
+
     def update(self):
+        print(self.HP)
         """ Move the player. """
         # Gravity
         self.calc_grav()
