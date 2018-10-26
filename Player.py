@@ -98,6 +98,8 @@ class Player(pygame.sprite.Sprite):
             # Stop our vertical movement
             self.change_y = 0
 
+            self.level.enemy_list.remove(block)
+
     def calc_grav(self):
         """ Calculate effect of gravity. """
         if self.change_y == 0:
